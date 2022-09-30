@@ -272,6 +272,6 @@
 * [四则运算表达式（c++实现）](https://blog.csdn.net/qq_43417265/article/details/104398835)   
 * [【OpenCV4】计算对称矩阵特征值和特征向量 cv::eigen() 用法详解和代码示例（c++）](https://blog.csdn.net/qq_42067550/article/details/126362216)   
 3. <font color=gree>项目地址</font>   
-本次Lab所有文件已上传至
+本次Lab所有文件已上传至https://github.com/rucerchui/Sophomore/tree/main/Lab1
 ---
 # 欢迎您的使用!
