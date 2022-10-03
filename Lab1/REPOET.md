@@ -154,8 +154,9 @@
     ```
     * 测试样例
        * 输入：3&emsp;2    
-       &emsp;&emsp;&emsp;1&ensp;2&ensp;3     
-       &emsp;&emsp;&emsp;4&ensp;5&ensp;6
+       &emsp;&emsp;&emsp;1&ensp;2   
+       &emsp;&emsp;&emsp;3&ensp;4        
+       &emsp;&emsp;&emsp;5&ensp;6
        * 输出：1&ensp;3&ensp;5     
        &emsp;&emsp;&emsp;2&ensp;4&ensp;6
      ---
