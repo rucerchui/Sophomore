@@ -1,25 +1,25 @@
 # Lab4 BBST实验报告
-## 一、功能简介
-1. 插入  
+## <font color=orange>一、功能简介</font>
+1. [插入](#jump1)  
    实现了将x插入B-树中
-2. 删除  
+2. [删除](#jump2)  
    实现了将x从B-树中删去
-3. 查询  
+3. [查询](#jump3)  
    实现了两种查询要求
    * 查询x的排名
    * 查询排名为x的数
-4. 求前驱  
+4. [求前驱](#jump4)  
    实现了求x的前驱(定义为小于x的最大数)
-5. 求后继  
+5. [求后继](#jump5)  
    实现了求x的后继(定义为大于x的最小数)
-6. 区间翻转
+6. [区间翻转](#jump6)  
    实现了使用splay树实现区间翻转操作。
-## 二、具体实验方式与测试样例
-### 插入
-1. B-树插入
+## <font color=orange>二、具体实验方式与测试样例</font>
+### <font color=grey><span id="jump1">插入</span></font>
+1. <font color=fuchsia>B-树插入</font>
    * 实现方式  
      为在B-树中插入一个新的关键码e，首先调用**search(e)** 在树中查找该关键码。查找过程必然终止于某一外部节点v，且其父节点由变量_hot指示。当然，此时的_hot必然指向某一叶节点（可能同时也是根节点）。接下来，在该节点中再次查找目标关键码e，可以确定e在其中的正确插入位置r。最后，只需将e插至这一位置。至此，_hot所指的节点中增加了一个关键码。若该节点内关键码的总数依然合法，则插入操作随即完成。否则，该节点发生了一次上溢，此时需要调用**solveOverflow(_hot)**，使该节点以及整树重新满足B-树的条件。
-2. 红黑树插入
+2. <font color=fuchsia>红黑树插入</font>
 * 代码
 ~~~c++
    template <typename T> BinNodePosi(T) RedBlack<T>::insert(const T& e) 
@@ -58,11 +58,11 @@
    }
   }
 ~~~ 
-### 删除
-1. B-树删除
+### <font color=grey><span id="jump2">删除</span></font>
+1. <font color=fuchsia>B-树删除</font>
    * 实现方式  
      为从B-树中删除关键码e，也首先需要调用**search(e)** 查找e所属的节点。倘若查找失败，则说明关键码e尚不存在，删除操作完成；否则目标关键码所在的节点必由返回的位置v指示。此时，通过顺序查找，即可进一步确定e在节点v中的秩r。令e与其直接后继互换位置，即可确保待删除的关键码e所属的节点v是叶节点。接下来可直接将e（及其左侧的外部空节点）从v中删去。如此，节点v中所含的关键码以及（空）分支将分别减少一个。若该节点所含关键码的总数依然合法，则删除操作完成。否则，该节点发生了下溢，需要通过调用**solveUnderflow(v)**，使该节点以及整树重新满足B-树的条件。  
-2. 红黑树删除
+2. <font color=fuchsia>红黑树删除</font>
 * 代码
 ~~~c++
  template <typename T> bool RedBlack<T>::remove(const T& e) 
@@ -125,11 +125,11 @@ template <typename T> void RedBlack<T>::solveDoubleBlack(BinNodePosi(T) r)
    }
 }
 ~~~
-### 查询
-1. 查询x的排名
+### <font color=grey><span id="jump3">查询</span></font>
+1. <font color=fuchsia>查询x的排名</font>
    * 实现方式  
      对B-树进行中序遍历，使用vector对遍历到的关键码进行记录，最后按照顺序确定x的顺序即可。
-2. 查询排名为x的数
+2. <font color=fuchsia>查询排名为x的数</font>
    * 实现方式  
       对B-树进行中序遍历，使用vector对遍历到的关键码进行记录，最后按照顺序确定顺序为第x的数即可。
 > 中序遍历的实现代码
@@ -150,15 +150,15 @@ void travel(BTNodePosi(int) root)
   travel(root->child[i]);
 }
 ~~~
-### 求前驱
-* 求前驱
+### <font color=grey><span id="jump4">求前驱</span></font>
+* <font color=fuchsia>求前驱</font>
   * 实现方式  
      对B-树进行中序遍历，使用vector对遍历到的关键码进行记录，使用自己实现的vector定位到不大于要查找的数，其前一位就是所求的数。
-### 求后继
-* 求后继
+### <font color=grey><span id="jump5">求后继</span></font>
+* <font color=fuchsia>求后继</font>
   * 实现方式  
      对B-树进行中序遍历，使用vector对遍历到的关键码进行记录，使用自己实现的vector定位到不大于要查找的数，其后一位就是所求的数。
-### 测试样例
+### <font color=grey>测试样例</font>
 > 需要输入 1 来确认需要进行功能一。
 * 输入
 ~~~
@@ -180,12 +180,14 @@ void travel(BTNodePosi(int) root)
 84185
 492737
 ~~~
-### 区间翻转
+### <font color=grey><span id="jump6">区间翻转</span></font>
+* <font color=fuchsia>区间翻转</font>
   * 实现方式  
     使用splay树维护权值排序，本题的权值即为编号排序。在反转区间[l,r]的时候，我们可以考虑利用Splay的性质，将l-1翻转至根节点，再将r+1翻转至根节点的右儿子,然后不断地替换子节点的左右子树即可。如果单纯的进行左右翻转，时间复杂度会大大增加，所以引入懒惰标记使得最后清算是否需要翻转，时间复杂度大大减小。
-   > 对于splay树，根据资料手写了一遍代码，使得基本理解了用法，具体算法图片里说的很清楚，这里不再赘述。
-   ![](1.jpg)
-### 测试样例
+   > 对于splay树，根据资料手写了一遍代码，使得基本理解了用法，具体算法图片里说的很清楚，这里不再赘述。  
+
+![](1.jpg)
+### <font color=grey>测试样例</font>
 > 需要输入 2 来确认需要进行功能二。
 * 输入
 ~~~
@@ -198,12 +200,12 @@ void travel(BTNodePosi(int) root)
 ~~~
 4 3 2 1 5
 ~~~
-## 四、总结
-1. 收获
+## <font color=orange>三、总结</font>
+1. <font color=fuchsia>收获</font>  
    本次实验巩固了自己对BST的理解，使得概念更加清晰，也弄懂了之前很久都想不明白的问题，受益匪浅。
-2. 参考资料
+2. <font color=fuchsia>参考资料</font>  
    * 《数据结构(c++语言版)》邓俊辉编著 清华大学出版社
    * [B站《文艺平衡树》算法讲解](https://www.bilibili.com/video/BV1gB4y1e7CT/?spm_id_from=333.337.search-card.all.click&vd_source=ae72203e6bd2550ea00aa8934b8c2fd2)
-3. 项目地址  
-   本次Lab所有文件已上传至[https://github.com/rucerchui/Sophomore/tree/main/Lab2](https://github.com/rucerchui/Sophomore/tree/main/Lab2)
+3. <font color=fuchsia>项目地址</font>    
+   本次Lab所有文件已上传至[https://github.com/rucerchui/Sophomore/tree/main/Lab4](https://github.com/rucerchui/Sophomore/tree/main/Lab4)
 # <font color=pink>欢迎您的使用!</font>
